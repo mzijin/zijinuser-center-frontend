@@ -1,14 +1,13 @@
+import React from 'react';
+import { Modal } from 'antd';
 import {
-  ProFormDateTimePicker,
-  ProFormRadio,
   ProFormSelect,
   ProFormText,
   ProFormTextArea,
   StepsForm,
-} from '@ant-design/pro-components';
-import '@umijs/max';
-import { Modal } from 'antd';
-import React from 'react';
+  ProFormRadio,
+  ProFormDateTimePicker,
+} from '@ant-design/pro-form';
 export type FormValueType = {
   target?: string;
   template?: string;
@@ -19,9 +18,10 @@ export type FormValueType = {
 export type UpdateFormProps = {
   onCancel: (flag?: boolean, formVals?: FormValueType) => void;
   onSubmit: (values: FormValueType) => Promise<void>;
-  updateModalOpen: boolean;
+  updateModalVisible: boolean;
   values: Partial<API.RuleListItem>;
 };
+
 const UpdateForm: React.FC<UpdateFormProps> = (props) => {
   return (
     <StepsForm
@@ -37,7 +37,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
             }}
             destroyOnClose
             title={'规则配置'}
-            open={props.updateModalOpen}
+            visible={props.updateModalVisible}
             footer={submitter}
             onCancel={() => {
               props.onCancel();
@@ -152,4 +152,5 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
     </StepsForm>
   );
 };
+
 export default UpdateForm;

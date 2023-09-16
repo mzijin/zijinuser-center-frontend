@@ -1,16 +1,36 @@
-export default [
-  { path: '/user', layout: false, routes: [{ path: '/user/login', component: './User/Login' }] },
-  { path: '/welcome', icon: 'smile', component: './Welcome' },
+﻿export default [
   {
-    path: '/admin',
-    icon: 'crown',
-    access: 'canAdmin',
+    path: '/user',
+    layout: false,
     routes: [
-      { path: '/admin', redirect: '/admin/sub-page' },
-      { path: '/admin/sub-page', component: './Admin' },
+      {
+        path: '/user',
+        routes: [
+          { name: '登录', path: '/user/login', component: './user/Login' },
+          { name: '注册', path: '/user/register', component: './user/Register' },
+        ],
+      },
+      { component: './404' },
     ],
   },
-  { icon: 'table', path: '/list', component: './TableList' },
+  { path: '/welcome', name: '欢迎', icon: 'smile', component: './Welcome' },
+  {
+    path: '/admin',
+    name: '管理页',
+    icon: 'crown',
+    access: 'canAdmin',
+    component: './Admin',
+    routes: [
+      {
+        path: '/admin/user-manage',
+        name: '用户管理',
+        icon: 'smile',
+        component: './Admin/UserManage',
+      },
+      { component: './404' },
+    ],
+  },
+  { name: '查询表格', icon: 'table', path: '/list', component: './TableList' },
   { path: '/', redirect: '/welcome' },
-  { path: '*', layout: false, component: './404' },
+  { component: './404' },
 ];
